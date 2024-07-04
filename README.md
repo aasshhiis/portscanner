@@ -1,66 +1,24 @@
-# Import the pyfiglet library, which is used to generate ASCII art banners
-import pyfiglet
+A port scanner is a software application program that scans a server or a network for open ports. It is a method of determining which ports on a network are open and could be receiving or sending data. Port scanning is a process for sending packets to specific ports on a host and analyzing responses to identify vulnerabilities.
 
-# Import the sys library, which provides access to system-specific parameters and functions
-import sys
+How Does it Work?
 
-# Import the socket library, which provides low-level network communication functions
-import socket
+Port scanning is a technique used to identify open ports on a network, which can be used to determine the services running on a server or network device. It is a common technique used by network administrators to troubleshoot network issues, identify vulnerabilities, and detect potential security threats.
 
-# Import the datetime library, which provides functions for working with dates and times
-from datetime import datetime
+Types of Port Scanners
 
-# Use pyfiglet to generate an ASCII art banner with the text "PORT SCANNER"
-ascii_banner = pyfiglet.figlet_format("PORT SCANNER")
-# Print the banner to the console
-print(ascii_banner)
+There are different types of port scanners, including:
 
-# Check if the user provided a target hostname or IP address as a command-line argument
-if len(sys.argv) == 2:
-    # Translate the hostname to an IPv4 address using the socket library
-    target = socket.gethostbyname(sys.argv[1]) 
-else:
-    # If no target was provided, print an error message
-    print("Invalid amount of Argument")
+TCP Port Scanner: Scans for open TCP ports.
+UDP Port Scanner: Scans for open UDP ports.
+SYN Port Scanner: Scans for open TCP ports using the SYN packet.
+ACK Port Scanner: Scans for open TCP ports using the ACK packet.
+Port Scanning Tools
 
-# Print a separator line to the console
-print("-" * 50)
-# Print the target hostname or IP address to the console
-print("Scanning Target: " + target)
-# Print the current date and time to the console
-print("Scanning started at:" + str(datetime.now()))
-# Print another separator line to the console
-print("-" * 50)
+There are many port scanning tools available, including:
 
-try:
-    # Loop through all possible port numbers (1-65,535)
-    for port in range(1,65535):
-        # Create a new socket object using the AF_INET (IPv4) and SOCK_STREAM (TCP) protocols
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # Set the socket timeout to 1 second
-        socket.setdefaulttimeout(1)
-        
-        # Attempt to connect to the target host on the current port
-        # The connect_ex method returns an error indicator (0 if successful, otherwise an error code)
-        result = s.connect_ex((target,port))
-        # If the connection was successful, print a message indicating that the port is open
-        if result ==0:
-            print("Port {} is open".format(port))
-        # Close the socket
-        s.close()
-        
-# Catch any KeyboardInterrupt exceptions (e.g. if the user presses Ctrl+C)
-except KeyboardInterrupt:
-    print("\n Exiting Program!!!!")
-    # Exit the program using the sys library
-    sys.exit()
-# Catch any socket.gaierror exceptions (e.g. if the hostname cannot be resolved)
-except socket.gaierror:
-    print("\n Hostname Could Not Be Resolved!!!!")
-    # Exit the program using the sys library
-    sys.exit()
-# Catch any socket.error exceptions (e.g. if the server is not responding)
-except socket.error:
-    print("\ Server not responding!!!!")
-    # Exit the program using the sys library
-    sys.exit()
+Nmap: A popular and widely used port scanning tool.
+OpenVAS: An open-source vulnerability scanner that includes port scanning capabilities.
+** Nessus**: A commercial vulnerability scanner that includes port scanning capabilities.
+Conclusion
+
+In summary, a port scanner is a software application program that scans a server or a network for open ports. It is a method of determining which ports on a network are open and could be receiving or sending data. Port scanning is a process for sending packets to specific ports on a host and analyzing responses to identify vulnerabilities.
